@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="SIunits" rel="Chapter" href="SIunits.html"><link title="Interface" rel="Section" href="#1_Interface">
+<link title="Overview" rel="Section" href="#overview">
+<link title="Operators" rel="Section" href="#ops">
+<link title="Defining units" rel="Subsection" href="#units">
+<link title="Manipulating numerical quantities" rel="Subsection" href="#values">
+<link title="Mutable quantities" rel="Subsection" href="#refs">
+<link title="Invalid units" rel="Subsection" href="#err">
+<link title="Temperature" rel="Subsection" href="#temp">
+<title>SIunits</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a href="index.html">Up</a>
+&nbsp;</div>
+<center><h1>Module <a href="type_SIunits.html">SIunits</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> SIunits: <code class="code"><span class="keyword">sig</span></code> <a href="SIunits.html">..</a> <code class="code"><span class="keyword">end</span></code></pre>Numerical values with units enforced at run-time.
+<p>
+
+    <code class="code"><span class="constructor">SIunits</span></code> provides run-time unit checking and automatic unit conversion.
+<p>
+
+    Read the <a href="SIunits.html#overview">overview</a> for an introduction to the features of this
+    library, and consult the descriptions of the <a href="SIunits.html#ops">operators</a> for further
+    details.
+<p>
+
+    Unless you require a large number of custom units, you should only need to
+    <code class="code"><span class="keyword">open</span></code> <a href="SIunits.Ops.html"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Ops</span></code></a> and <a href="SIunits.Common.html"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Common</span></code></a> in order to use this library.<br>
+<hr width="100%">
+<br>
+<span id="1_Interface"><h1>Interface</h1></span><br>
+<pre><span class="keyword">module</span> <a href="SIunits.Unit.html">Unit</a>: <code class="code"><span class="keyword">sig</span></code> <a href="SIunits.Unit.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><div class="info">
+Definition of units.
+</div>
+<pre><span class="keyword">module</span> <a href="SIunits.Value.html">Value</a>: <code class="code"><span class="keyword">sig</span></code> <a href="SIunits.Value.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><div class="info">
+Creation and conversion of numerical quantities.
+</div>
+<pre><span class="keyword">module</span> <a href="SIunits.Ops.html">Ops</a>: <code class="code"><span class="keyword">sig</span></code> <a href="SIunits.Ops.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><div class="info">
+Grouped infix operators.
+</div>
+<pre><span class="keyword">module</span> <a href="SIunits.Common.html">Common</a>: <code class="code"><span class="keyword">sig</span></code> <a href="SIunits.Common.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><div class="info">
+A collection of commonly-used units.
+</div>
+<br>
+<span id="overview"><h1>Overview</h1></span>
+<p>
+
+The two important types provided by <code class="code"><span class="constructor">SIunits</span></code> are the <b>unit definitions</b>
+(<a href="SIunits.Unit.html#TYPEt"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Unit</span>.t</code></a>) and <b>values</b> (<a href="SIunits.Value.html#TYPEt"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Value</span>.t</code></a>) that associate a numerical quantity
+with a particular set of units.
+<p>
+
+<span id="units"><h2>Defining units</h2></span>
+<p>
+
+Units can be defined as combinations (<a href="SIunits.Unit.html#TYPEd"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Unit</span>.d</code></a>) of the basic SI units
+(<a href="SIunits.Unit.html#TYPEu"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Unit</span>.u</code></a>), or by taking the product (<a href="SIunits.Unit.html#VALmult"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Unit</span>.mult</code></a>) or ratio (<a href="SIunits.Unit.html#VALdiv"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Unit</span>.div</code></a>) of
+existing units:
+<p>
+
+<pre></pre><code class="code"><span class="keyword">let</span>&nbsp;kph&nbsp;=&nbsp;<span class="constructor">Common</span>.km&nbsp;%/&nbsp;<span class="constructor">Common</span>.hour&nbsp;<span class="keyword">in</span>&nbsp;...</code><pre></pre>
+<p>
+
+Non-SI units can also be defined as scalar multiples of existing units.
+For example, millimetres of mercury (mmHg) can be defined in terms of pascals,
+which are defined in <a href="SIunits.Common.html"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Common</span></code></a>:
+<p>
+
+<pre></pre><code class="code"><span class="keyword">let</span>&nbsp;mmHg&nbsp;=&nbsp;<span class="constructor">Unit</span>.scale&nbsp;133.322387415&nbsp;<span class="constructor">Common</span>.pascal&nbsp;<span class="keyword">in</span>&nbsp;...</code><pre></pre>
+<p>
+
+Units such as (hour)<sup class="superscript">-1</sup> can be defined using (min)<sup class="superscript">-1</sup>:
+<p>
+
+<pre></pre><code class="code"><span class="keyword">let</span>&nbsp;per_min&nbsp;=&nbsp;<span class="constructor">Unit</span>.(per&nbsp;[<span class="constructor">Minute</span>])&nbsp;<span class="keyword">in</span><br>
+<span class="comment">(*&nbsp;1&nbsp;per&nbsp;hour&nbsp;=&nbsp;1/60&nbsp;per&nbsp;minute&nbsp;*)</span><br>
+<span class="keyword">let</span>&nbsp;per_hour&nbsp;=&nbsp;<span class="constructor">Unit</span>.scale&nbsp;(1.0&nbsp;/.&nbsp;60.0)&nbsp;per_min&nbsp;<span class="keyword">in</span>&nbsp;...</code><pre></pre>
+<p>
+
+<span id="values"><h2>Manipulating numerical quantities</h2></span>
+<p>
+
+Numerical quantities can then be associated with units and scaled to other
+units (which must have compatible dimensions):
+<p>
+
+<pre></pre><code class="code"><span class="keyword">let</span>&nbsp;speed1&nbsp;=&nbsp;60.0&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.km&nbsp;/:&nbsp;(2.0&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.hour)<br>
+<span class="keyword">and</span>&nbsp;speed2&nbsp;=&nbsp;30.0&nbsp;%&lt;&nbsp;kph&nbsp;<span class="comment">(*&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;line&nbsp;above&nbsp;*)</span>&nbsp;<span class="keyword">in</span><br>
+<span class="keyword">let</span>&nbsp;m_per_s&nbsp;=&nbsp;speed1&nbsp;%&gt;&nbsp;<span class="constructor">Unit</span>.(ratio&nbsp;[<span class="constructor">Metre</span>]&nbsp;[<span class="constructor">Second</span>])&nbsp;<span class="keyword">in</span>&nbsp;...</code><pre></pre>
+<p>
+
+<pre></pre><code class="code"><span class="keyword">let</span>&nbsp;pressure&nbsp;=&nbsp;110.0&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.mmHg&nbsp;%&gt;&nbsp;<span class="constructor">Common</span>.kilo_pascal&nbsp;<span class="keyword">in</span>&nbsp;...</code><pre></pre>
+<p>
+
+Numerical quantities can be added and subtracted if their units are compatible
+and can also be multiplied or divided:
+<p>
+
+<pre></pre><code class="code"><span class="keyword">let</span>&nbsp;dist1&nbsp;=&nbsp;5.0&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.km<br>
+<span class="keyword">and</span>&nbsp;dist2&nbsp;=&nbsp;212.0&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.metre&nbsp;<span class="keyword">in</span><br>
+<span class="keyword">let</span>&nbsp;sum&nbsp;=&nbsp;dist1&nbsp;+:&nbsp;dist2<br>
+<span class="keyword">and</span>&nbsp;area&nbsp;=&nbsp;dist1&nbsp;*:&nbsp;dist2&nbsp;<span class="keyword">in</span><br>
+<span class="keyword">let</span>&nbsp;sum_cm&nbsp;=&nbsp;sum&nbsp;%&gt;&nbsp;<span class="constructor">Common</span>.cm&nbsp;<span class="comment">(*&nbsp;521200.0&nbsp;cm&nbsp;*)</span><br>
+<span class="keyword">and</span>&nbsp;area_km2&nbsp;=&nbsp;area&nbsp;%&gt;&nbsp;(<span class="constructor">Common</span>.km&nbsp;%*&nbsp;<span class="constructor">Common</span>.km)&nbsp;<span class="comment">(*&nbsp;1.06&nbsp;km^2&nbsp;*)</span><br>
+<span class="keyword">in</span>&nbsp;...&nbsp;</code><pre></pre>
+<p>
+
+<span id="refs"><h2>Mutable quantities</h2></span>
+<p>
+
+Mutable values (of type <code class="code"><span class="constructor">Value</span>.t ref</code>) can be updated and referenced with the
+<code class="code">&lt;-:</code> and <code class="code">!:</code> operators, respectively.
+The update operator will retain the units of the reference's original value.
+<p>
+
+<pre></pre><code class="code"><span class="keyword">let</span>&nbsp;x_in_m&nbsp;=&nbsp;ref&nbsp;(2.0&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.metre)&nbsp;<span class="keyword">in</span><br>
+x_in_m&nbsp;&lt;-:&nbsp;(1.9&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.km);<br>
+!:&nbsp;x_in_m&nbsp;=&nbsp;1900.0&nbsp;<span class="comment">(*&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;*)</span></code><pre></pre>
+<p>
+
+<span id="err"><h2>Invalid units</h2></span>
+<p>
+
+An exception is thrown when two values with incompatible units are combined,
+and when a value is converted into a set of incompatible units:
+<p>
+
+<pre></pre><code class="code"><span class="keyword">let</span>&nbsp;a&nbsp;=&nbsp;5.0&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.metre<br>
+<span class="keyword">and</span>&nbsp;b&nbsp;=&nbsp;1.0&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.min&nbsp;<span class="keyword">in</span><br>
+a&nbsp;+:&nbsp;b&nbsp;<span class="comment">(*&nbsp;raises&nbsp;Value.Invalid_units&nbsp;(a,&nbsp;b,&nbsp;"+:")&nbsp;*)</span></code><pre></pre>
+<p>
+
+<pre></pre><code class="code"><span class="keyword">let</span>&nbsp;a&nbsp;=&nbsp;5.0&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.metre&nbsp;<span class="keyword">in</span><br>
+a&nbsp;%&gt;&nbsp;<span class="constructor">Common</span>.min&nbsp;<span class="comment">(*&nbsp;raises&nbsp;Value.Invalid_conversion&nbsp;(a,&nbsp;units)&nbsp;*)</span></code><pre></pre>
+<p>
+
+<span id="temp"><h2>Temperature</h2></span>
+<p>
+
+<code class="code"><span class="constructor">Common</span></code> defines several temperature <a href="SIunits.Common.html#temp">conversion functions</a>.
+Note that arithmetic operations are performed with respect to
+<b>degrees Kelvin</b> and will not produce values consistent with arithmetic in
+degrees Celsius or degrees Fahrenheit:
+<p>
+
+<pre></pre><code class="code"><span class="keyword">let</span>&nbsp;t1&nbsp;=&nbsp;from_celsius&nbsp;30.0<br>
+<span class="keyword">and</span>&nbsp;t2&nbsp;=&nbsp;from_celsius&nbsp;10.0&nbsp;<span class="keyword">in</span><br>
+to_celsius&nbsp;(t1&nbsp;+:&nbsp;t2)&nbsp;<span class="comment">(*&nbsp;313&nbsp;degrees&nbsp;Celsius&nbsp;*)</span></code><pre></pre>
+<p>
+
+This is because they do not have the same zero-point as degrees Kelvin.
+Arithmetic with non-SI units that have the same zero-point as the SI units
+(e.g., inches, mmHg) will work as expected.
+<p>
+
+<span id="ops"><h1>Operators</h1></span>
+<p>
+
+Operators are defined in <a href="SIunits.Unit.html"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Unit</span></code></a> and <a href="SIunits.Value.html"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Value</span></code></a>, and are collected in <a href="SIunits.Ops.html"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Ops</span></code></a> for
+convenience.
+<p>
+
+The convention is that operators beginning with <code class="code">%</code> are concerned with units
+(specifically unit creation, unit equivalence and unit conversion); operators
+ending with <code class="code">:</code> are concerned with values (specifically arithmetic operations
+and unit/numerical equality); operators ending with <code class="code">:.</code> perform scalar
+operations on values.
+<p>
+
+Mutable values (<code class="code"><span class="constructor">Value</span>.t ref</code>) are manipulated with the <code class="code">!:</code> and <code class="code">&lt;-:</code>
+operators, which respectively return and update the value.
+Both operators retain the original units associated with the mutable value.
+The <code class="code">&lt;-:</code> operator raises <code class="code"><span class="constructor">Invalid_units</span> (v1, v2, <span class="string">"&lt;-:"</span>)</code> if the units of the
+original and new values are incompatible.
+<p>
+
+The precedence and associativity of the operators are defined in the
+<a href="http://caml.inria.fr/pub/docs/manual-ocaml/expr.html">OCaml manual</a>.
+All binary operators are left-associative and the order of precedence is as
+per the standard arithmetic operators: <code class="code">!:</code> has the highest precedence,
+followed by the unit operators and value multiplication and division, then the
+value addition and subtraction operators, and finally <code class="code">&lt;-:</code> and the equality
+operators.
+<p>
+
+This is why unit conversion can be written as:
+<p>
+
+<pre></pre><code class="code"><span class="keyword">let</span>&nbsp;pressure&nbsp;=&nbsp;110.0&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.mmHg&nbsp;%&gt;&nbsp;<span class="constructor">Common</span>.kilo_pascal&nbsp;<span class="keyword">in</span>&nbsp;...</code><pre></pre>
+<p>
+
+But the product or ratio of two values must be written as:
+<p>
+
+<pre></pre><code class="code"><span class="keyword">let</span>&nbsp;speed1&nbsp;=&nbsp;60.0&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.km&nbsp;/:&nbsp;(2.0&nbsp;%&lt;&nbsp;<span class="constructor">Common</span>.hour)&nbsp;<span class="keyword">in</span>&nbsp;...</code><pre></pre><br>
+</body></html>

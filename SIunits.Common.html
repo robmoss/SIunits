@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="SIunits.Ops.html">
+<link rel="Up" href="SIunits.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="SIunits" rel="Chapter" href="SIunits.html"><link title="Common units" rel="Section" href="#2_Commonunits">
+<link title="Time" rel="Subsection" href="#3_Time">
+<link title="Length" rel="Subsection" href="#3_Length">
+<link title="Permeability" rel="Subsection" href="#3_Permeability">
+<link title="Solute transport" rel="Subsection" href="#3_Solutetransport">
+<link title="Force and pressure" rel="Subsection" href="#3_Forceandpressure">
+<link title="Flow rate" rel="Subsection" href="#3_Flowrate">
+<link title="Temperature" rel="Subsection" href="#temp">
+<title>SIunits.Common</title>
+</head>
+<body>
+<div class="navbar"><a href="SIunits.Ops.html">Previous</a>
+&nbsp;<a href="SIunits.html">Up</a>
+&nbsp;</div>
+<center><h1>Module <a href="type_SIunits.Common.html">SIunits.Common</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Common: <code class="code"><span class="keyword">sig</span></code> <a href="SIunits.Common.html">..</a> <code class="code"><span class="keyword">end</span></code></pre>A collection of commonly-used units.<br>
+<hr width="100%">
+<br>
+<span id="2_Commonunits"><h2>Common units</h2></span>
+<p>
+
+    This module predefines a number of units that are commonly used when
+    describing tubular dimensions and epithelial transport properties.<br>
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> = <code class="type"><a href="SIunits.Unit.html#TYPEt">SIunits.Unit.t</a></code> </pre>
+
+<br>
+<span id="3_Time"><h3>Time</h3></span><br>
+<pre><span id="VALsec"><span class="keyword">val</span> sec</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALmin"><span class="keyword">val</span> min</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALhour"><span class="keyword">val</span> hour</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><br>
+<span id="3_Length"><h3>Length</h3></span><br>
+<pre><span id="VALmetre"><span class="keyword">val</span> metre</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALkm"><span class="keyword">val</span> km</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALcm"><span class="keyword">val</span> cm</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALmm"><span class="keyword">val</span> mm</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALum"><span class="keyword">val</span> um</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><br>
+<span id="3_Permeability"><h3>Permeability</h3></span><br>
+<pre><span id="VALcm_per_sec"><span class="keyword">val</span> cm_per_sec</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALcm_per_min"><span class="keyword">val</span> cm_per_min</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALum_per_sec"><span class="keyword">val</span> um_per_sec</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALum_per_min"><span class="keyword">val</span> um_per_min</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><br>
+<span id="3_Solutetransport"><h3>Solute transport</h3></span><br>
+<pre><span id="VALmmol_per_cm2_sec"><span class="keyword">val</span> mmol_per_cm2_sec</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALmmol_per_cm2_min"><span class="keyword">val</span> mmol_per_cm2_min</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALnmol_per_cm2_sec"><span class="keyword">val</span> nmol_per_cm2_sec</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALnmol_per_cm2_min"><span class="keyword">val</span> nmol_per_cm2_min</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><br>
+<span id="3_Forceandpressure"><h3>Force and pressure</h3></span><br>
+<pre><span id="VALnewton"><span class="keyword">val</span> newton</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALpascal"><span class="keyword">val</span> pascal</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALkilo_pascal"><span class="keyword">val</span> kilo_pascal</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALmmHg"><span class="keyword">val</span> mmHg</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><br>
+<span id="3_Flowrate"><h3>Flow rate</h3></span><br>
+<pre><span id="VALl_per_sec"><span class="keyword">val</span> l_per_sec</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALl_per_min"><span class="keyword">val</span> l_per_min</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALml_per_sec"><span class="keyword">val</span> ml_per_sec</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALml_per_min"><span class="keyword">val</span> ml_per_min</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALul_per_sec"><span class="keyword">val</span> ul_per_sec</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALul_per_min"><span class="keyword">val</span> ul_per_min</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALnl_per_sec"><span class="keyword">val</span> nl_per_sec</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALnl_per_min"><span class="keyword">val</span> nl_per_min</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALpl_per_sec"><span class="keyword">val</span> pl_per_sec</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALpl_per_min"><span class="keyword">val</span> pl_per_min</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><br>
+<span id="temp"><h3>Temperature</h3></span><br>
+<pre><span id="VALkelvin"><span class="keyword">val</span> kelvin</span> : <code class="type"><a href="SIunits.Common.html#TYPEt">t</a></code></pre><pre><span id="VALto_celsius"><span class="keyword">val</span> to_celsius</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">SIunits.Value.t</a> -> float</code></pre><div class="info">
+Convert a temperature to degrees Celsius.<br>
+</div>
+<pre><span id="VALto_fahrenheit"><span class="keyword">val</span> to_fahrenheit</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">SIunits.Value.t</a> -> float</code></pre><div class="info">
+Convert a temperature to degrees Fahrenheit.<br>
+</div>
+<pre><span id="VALfrom_celsius"><span class="keyword">val</span> from_celsius</span> : <code class="type">float -> <a href="SIunits.Value.html#TYPEt">SIunits.Value.t</a></code></pre><div class="info">
+Convert degrees Celsius to a temperature.<br>
+</div>
+<pre><span id="VALfrom_fahrenheit"><span class="keyword">val</span> from_fahrenheit</span> : <code class="type">float -> <a href="SIunits.Value.html#TYPEt">SIunits.Value.t</a></code></pre><div class="info">
+Convert degrees Fahrenheit to a temperature.<br>
+</div>
+</body></html>

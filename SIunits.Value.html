@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="SIunits.Unit.html">
+<link rel="next" href="SIunits.Ops.html">
+<link rel="Up" href="SIunits.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="SIunits" rel="Chapter" href="SIunits.html"><link title="Exceptions" rel="Section" href="#2_Exceptions">
+<link title="Value creation" rel="Section" href="#2_Valuecreation">
+<link title="Value properties" rel="Section" href="#2_Valueproperties">
+<link title="Floating-point comparison" rel="Section" href="#2_Floatingpointcomparison">
+<link title="Value comparison" rel="Section" href="#2_Valuecomparison">
+<link title="Value assignment" rel="Section" href="#2_Valueassignment">
+<link title="Value conversion" rel="Section" href="#2_Valueconversion">
+<link title="Arithmetic operations" rel="Section" href="#2_Arithmeticoperations">
+<title>SIunits.Value</title>
+</head>
+<body>
+<div class="navbar"><a href="SIunits.Unit.html">Previous</a>
+&nbsp;<a href="SIunits.html">Up</a>
+&nbsp;<a href="SIunits.Ops.html">Next</a>
+</div>
+<center><h1>Module <a href="type_SIunits.Value.html">SIunits.Value</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Value: <code class="code"><span class="keyword">sig</span></code> <a href="SIunits.Value.html">..</a> <code class="code"><span class="keyword">end</span></code></pre>Creation and conversion of numerical quantities.<br>
+<hr width="100%">
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+<div class="info">
+The abstract value type, which encapsulates both the units and the
+    numerical value.<br>
+</div>
+
+<br>
+<span id="2_Exceptions"><h2>Exceptions</h2></span><br>
+<pre><span id="EXCEPTIONInvalid_conversion"><span class="keyword">exception</span> Invalid_conversion</span> <span class="keyword">of</span> <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> * <a href="SIunits.Unit.html#TYPEd">SIunits.Unit.d</a></code></pre>
+<div class="info">
+The exception that is raised by <a href="SIunits.Value.html#VALscale_to"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Value</span>.scale_to</code></a> and <a href="SIunits.Value.html#VALconvert"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Value</span>.convert</code></a> when a value
+    cannot be converted into the given units.<br>
+</div>
+<pre><span id="EXCEPTIONInvalid_units"><span class="keyword">exception</span> Invalid_units</span> <span class="keyword">of</span> <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> * <a href="SIunits.Value.html#TYPEt">t</a> * string</code></pre>
+<div class="info">
+The exception that is raised by <a href="SIunits.Value.html#VAL(+:)"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Value</span>.(+:)</code></a>, <a href="SIunits.Value.html#VAL(-:)"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Value</span>.(-:)</code></a> and <a href="SIunits.Value.html#VAL(<-:)"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Value</span>.(&lt;-:)</code></a> when two
+    values cannot be combined due to incompatible units. The string argument
+    identifies which function/operator raised the exception.<br>
+</div>
+<br>
+<span id="2_Valuecreation"><h2>Value creation</h2></span><br>
+<pre><span id="VALvalue"><span class="keyword">val</span> value</span> : <code class="type">float -> <a href="SIunits.Unit.html#TYPEt">SIunits.Unit.t</a> -> <a href="SIunits.Value.html#TYPEt">t</a></code></pre><div class="info">
+Create a value that encapsulates the given numerical value and units.<br>
+</div>
+<pre><span id="VAL(%<)"><span class="keyword">val</span> (%&lt;)</span> : <code class="type">float -> <a href="SIunits.Unit.html#TYPEt">SIunits.Unit.t</a> -> <a href="SIunits.Value.html#TYPEt">t</a></code></pre><div class="info">
+Create a value that encapsulates the given numerical value and units.<br>
+</div>
+<br>
+<span id="2_Valueproperties"><h2>Value properties</h2></span><br>
+<pre><span id="VALunits_of"><span class="keyword">val</span> units_of</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Unit.html#TYPEt">SIunits.Unit.t</a></code></pre><div class="info">
+Return the units associated with the value.<br>
+</div>
+<br>
+<span id="2_Floatingpointcomparison"><h2>Floating-point comparison</h2></span><br>
+<pre><span id="VAL(=.)"><span class="keyword">val</span> (=.)</span> : <code class="type">float -> float -> bool</code></pre><div class="info">
+Compare two floating-point values for equality, with a relative error
+    tolerance of 10<sup class="superscript">-15</sup> and an absolute error tolerance of 10<sup class="superscript">-200</sup>.
+<p>
+
+    The algorithm is described in these articles by
+    <a href="http://adtmag.com/articles/2000/03/16/comparing-floats-how-to-determine-if-floating-quantities-are-close-enough-once-a-tolerance-has-been.aspx">Alberto Squassabia</a>
+    and
+    <a href="http://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/">Bruce Dawson</a>
+    (older version
+    <a href="http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm">here</a>).<br>
+</div>
+<pre><span id="VAL(=!.)"><span class="keyword">val</span> (=!.)</span> : <code class="type">float -> float -> bool</code></pre><div class="info">
+Compare two floating-point values for inequality (negation of <a href="SIunits.Value.html#VAL(=.)"><code class="code"><span class="constructor">SIunits</span>.<span class="constructor">Value</span>.(=.)</code></a>).<br>
+</div>
+<pre><span id="VALfloat_eq"><span class="keyword">val</span> float_eq</span> : <code class="type">?rel:float -> ?abs:float -> unit -> float -> float -> bool</code></pre><div class="info">
+Define a custom comparison function for floating-point values.<br>
+</div>
+<div class="param_info"><code class="code">rel</code> : The relative error tolerance (default = 10<sup class="superscript">-15</sup>).</div>
+<div class="param_info"><code class="code">abs</code> : The absolute error tolerance (default = 10<sup class="superscript">-200</sup>).</div>
+<br>
+<span id="2_Valuecomparison"><h2>Value comparison</h2></span><br>
+<pre><span id="VALeq"><span class="keyword">val</span> eq</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a> -> bool</code></pre><div class="info">
+Compare both units and numerical values for equality.<br>
+</div>
+<pre><span id="VAL(=:)"><span class="keyword">val</span> (=:)</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a> -> bool</code></pre><div class="info">
+Compare both units and numerical values for equality.<br>
+</div>
+<pre><span id="VALeq_units"><span class="keyword">val</span> eq_units</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a> -> bool</code></pre><div class="info">
+Compare units for equivalence.<br>
+</div>
+<pre><span id="VAL(=?:)"><span class="keyword">val</span> (=?:)</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a> -> bool</code></pre><div class="info">
+Compare units for equivalence.<br>
+</div>
+<br>
+<span id="2_Valueassignment"><h2>Value assignment</h2></span><br>
+<pre><span id="VALassign"><span class="keyword">val</span> assign</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> Pervasives.ref -> <a href="SIunits.Value.html#TYPEt">t</a> -> unit</code></pre><div class="info">
+Assign a numerical value to a value reference. This action conserves the
+    multiplicative scaling factor of the value reference.<br>
+<b>Raises</b> <code>Invalid_units</code> <code class="code">(v1, v2, <span class="string">"assign"</span>)</code> if the units of the two values
+    (<code class="code">v1</code> and <code class="code">v2</code>) are not compatible.<br>
+</div>
+<pre><span id="VAL(<-:)"><span class="keyword">val</span> (&lt;-:)</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> Pervasives.ref -> <a href="SIunits.Value.html#TYPEt">t</a> -> unit</code></pre><div class="info">
+Assign a numerical value to a value reference. This action preserves the
+    units of the reference.<br>
+<b>Raises</b> <code>Invalid_units</code> <code class="code">(v1, v2, <span class="string">"&lt;-:"</span>)</code> if the units of the two values
+    (<code class="code">v1</code> and <code class="code">v2</code>) are not compatible.<br>
+</div>
+<pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> Pervasives.ref -> float</code></pre><div class="info">
+Return the value in terms of the original units.<br>
+</div>
+<pre><span id="VAL(!:)"><span class="keyword">val</span> (!:)</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> Pervasives.ref -> float</code></pre><div class="info">
+Return the value in terms of the original units.<br>
+</div>
+<br>
+<span id="2_Valueconversion"><h2>Value conversion</h2></span><br>
+<pre><span id="VALscale_to"><span class="keyword">val</span> scale_to</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Unit.html#TYPEt">SIunits.Unit.t</a> -> float</code></pre><div class="info">
+Scale the given value to a specific set of units and return the numerical
+    value.<br>
+<b>Raises</b> <code>Invalid_conversion</code> <code class="code">(v, d)</code> if the value <code class="code">v</code> and units <code class="code">d</code> are not
+    compatible.<br>
+</div>
+<pre><span id="VAL(%>)"><span class="keyword">val</span> (%&gt;)</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Unit.html#TYPEt">SIunits.Unit.t</a> -> float</code></pre><div class="info">
+Scale the given value to a specific set of units and return the numerical
+    value.<br>
+<b>Raises</b> <code>Invalid_conversion</code> <code class="code">(v, d)</code> if the value <code class="code">v</code> and units <code class="code">d</code> are not
+    compatible.<br>
+</div>
+<pre><span id="VALconvert"><span class="keyword">val</span> convert</span> : <code class="type">value:float -> from:<a href="SIunits.Unit.html#TYPEt">SIunits.Unit.t</a> -> into:<a href="SIunits.Unit.html#TYPEt">SIunits.Unit.t</a> -> float</code></pre><div class="info">
+Convert a numerical value from one set of units to another. This is
+    equivalent to <code class="code">scale_to (create value from) into</code> or
+    <code class="code">value %&lt; from %&gt;into</code>.<br>
+<b>Raises</b> <code>Invalid_conversion</code> <code class="code">(v, d)</code> if the numerical value and source units
+    <code class="code">v</code> are not compatible with the destination units <code class="code">d</code>.<br>
+</div>
+<br>
+<span id="2_Arithmeticoperations"><h2>Arithmetic operations</h2></span><br>
+<pre><span id="VAL(+:)"><span class="keyword">val</span> (+:)</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a></code></pre><div class="info">
+The addition of two values.<br>
+<b>Raises</b> <code>Invalid_units</code> <code class="code">(v1, v2, <span class="string">"+:"</span>)</code> if the units of the two values
+    (<code class="code">v1</code> and <code class="code">v2</code>) are not compatible.<br>
+</div>
+<pre><span id="VAL(-:)"><span class="keyword">val</span> (-:)</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a></code></pre><div class="info">
+The subtraction of one value from another.<br>
+<b>Raises</b> <code>Invalid_units</code> <code class="code">(v1, v2, <span class="string">"-:"</span>)</code> if the units of the two values
+    (<code class="code">v1</code> and <code class="code">v2</code>) are not compatible.<br>
+</div>
+<pre><span id="VAL( *: )"><span class="keyword">val</span> ( *: )</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a></code></pre><div class="info">
+The multiplication of two values.<br>
+</div>
+<pre><span id="VAL(/:)"><span class="keyword">val</span> (/:)</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a></code></pre><div class="info">
+The division of one value by another.<br>
+</div>
+<pre><span id="VAL( *:. )"><span class="keyword">val</span> ( *:. )</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> float -> <a href="SIunits.Value.html#TYPEt">t</a></code></pre><div class="info">
+Scalar multiplication.<br>
+</div>
+<pre><span id="VAL(/:.)"><span class="keyword">val</span> (/:.)</span> : <code class="type"><a href="SIunits.Value.html#TYPEt">t</a> -> float -> <a href="SIunits.Value.html#TYPEt">t</a></code></pre><div class="info">
+Scalar division.<br>
+</div>
+<pre><span id="VAL(/.:)"><span class="keyword">val</span> (/.:)</span> : <code class="type">float -> <a href="SIunits.Value.html#TYPEt">t</a> -> <a href="SIunits.Value.html#TYPEt">t</a></code></pre><div class="info">
+Scalar reciprocal.<br>
+</div>
+</body></html>
